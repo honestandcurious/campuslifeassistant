@@ -1,0 +1,67 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: campus-life-assistant
+  datasource:
+    url: jdbc:mysql://localhost:3307/campus_agent?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 3s
+  jackson:
+    default-property-inclusion: non_null
+
+langchain4j:
+  community:
+    redis:
+      host: localhost
+      port: 6379
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+logging:
+  level:
+    com.student.agent: info
+    org.springframework.web: info
+
+app:
+  ai:
+    enabled: false
+    api-key: ${OPENAI_API_KEY:}
+    chat-model: gpt-4o-mini
+    embedding-model: text-embedding-3-small
+  rag:
+    min-score: 0.5
+    max-results: 3
+    redis:
+      enabled: true
+      host: localhost
+      port: 6379
+      index-name: campus_material_index
+      prefix: "material:"
+      dimension: 1536
+  weather:
+    base-url: https://api.open-meteo.com
+    api-key: ${WEATHER_API_KEY:}
+    campus-name: 校园
+    latitude: 31.2304
+    longitude: 121.4737
+  amap:
+    api-key: ${AMAP_MAPS_API_KEY:}
+    base-url: https://restapi.amap.com
+
+
