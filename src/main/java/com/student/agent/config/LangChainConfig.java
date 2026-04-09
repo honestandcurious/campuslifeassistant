@@ -117,7 +117,7 @@ public class LangChainConfig {
         return DocumentSplitters.recursive(500, 100);
     }
 
-   // @Bean
+   //@Bean
     @ConditionalOnProperty(prefix = "app.ai", name = "enabled", havingValue = "true")
     public EmbeddingStoreIngestor embeddingStoreIngestor(EmbeddingStore<TextSegment> redisEmbeddingStore,
                                                          DocumentSplitter documentSplitter,
