@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: campus-life-assistant
+  main:
+    web-application-type: reactive
   datasource:
     url: jdbc:mysql://localhost:3307/campus_agent?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
@@ -23,6 +25,9 @@ langchain4j:
     redis:
       host: localhost
       port: 6379
+      index-name: campus_material_index
+      prefix: "material:"
+      dimension: 1536
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
@@ -37,12 +42,14 @@ logging:
   level:
     com.student.agent: info
     org.springframework.web: info
+    dev.langchain4j: info
 
 app:
   ai:
     enabled: true
+    base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
     api-key: sk-f4a9ab9f1e2847928d7289301cd376c2
-    chat-model: qwen-max
+    chat-model: qwen3.5-35b-a3b
     embedding-model: text-embedding-v4
   rag:
     min-score: 0.5
@@ -57,10 +64,8 @@ app:
   weather:
     base-url: https://api.open-meteo.com
     campus-name: 校园
-    latitude: 31.2304
-    longitude: 121.4737
+    latitude: 34.726
+    longitude: 108.4953
   amap:
+    base-url: https://restapi.amap.com
     api-key: 482538695d06d940af1552eee48361d2
-
-
-

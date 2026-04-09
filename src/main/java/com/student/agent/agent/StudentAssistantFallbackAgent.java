@@ -17,7 +17,7 @@ public class StudentAssistantFallbackAgent implements StudentAssistantAgent {
         if (message.contains("带伞") || message.contains("天气")) {
             String weather = tools.getWeather(message);
             String schedule = tools.getSchedule("明天课表");
-            return weather + "\n" + schedule + "\n建议：如果天气描述包含降雨或阵雨，出门带伞并提前10分钟出发。";
+            return weather + "\n" + schedule + "\n建议：如果天气结果包含降雨、阵雨或较高降水概率，出门带伞并提前10分钟出发。";
         }
         if (message.contains("路线") || message.contains("怎么去") || message.contains("导航")) {
             return tools.queryroute(message);

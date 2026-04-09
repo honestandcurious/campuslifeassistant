@@ -34,7 +34,7 @@ public class StudentAssistantTools {
         return scheduleService.getScheduleByNaturalLanguage(query);
     }
 
-    @Tool("查询课程资料、期末试卷、复习提纲等RAG内容")
+    @Tool("查询课程资料、期末试卷、复习提纲等 RAG 内容")
     public String queryMaterial(String query) {
         return materialService.queryMaterials(query);
     }

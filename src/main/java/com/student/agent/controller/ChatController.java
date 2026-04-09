@@ -3,11 +3,13 @@ package com.student.agent.controller;
 import com.student.agent.service.ChatService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping
@@ -19,10 +21,10 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @PostMapping("/chat")
-    public ChatResponse chat(@Valid @RequestBody ChatRequest request,
+    @PostMapping(value = "/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> chat(@Valid @RequestBody ChatRequest request,
                              @RequestHeader(value = "X-Memory-Id", defaultValue = "default-user") String memoryId) {
-        return new ChatResponse(chatService.chat(memoryId, request.getMessage()));
+        return chatService.chat(memoryId, request.getMessage());
     }
 
     public static class ChatRequest {
@@ -35,18 +37,6 @@ public class ChatController {
 
         public void setMessage(String message) {
             this.message = message;
-        }
-    }
-
-    public static class ChatResponse {
-        private final String reply;
-
-        public ChatResponse(String reply) {
-            this.reply = reply;
-        }
-
-        public String getReply() {
-            return reply;
         }
     }
 }
