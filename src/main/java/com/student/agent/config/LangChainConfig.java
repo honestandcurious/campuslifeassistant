@@ -97,9 +97,9 @@ public class LangChainConfig {
 
     @Bean
     @ConditionalOnProperty(prefix = "app.ai", name = "enabled", havingValue = "true")
-    public EmbeddingModel embeddingModel(@Value("${app.ai.api-key}") String apiKey,
-                                         @Value("${app.ai.embedding-model}") String embeddingModelName,
-                                         @Value("${app.ai.base-url:}") String baseUrl) {
+    public EmbeddingModel embeddingModel(@Value("${app.ai.embedding-model.api-key}") String apiKey,
+                                         @Value("${app.ai.embedding-model.model}") String embeddingModelName,
+                                         @Value("${app.ai.embedding-model.base-url:}") String baseUrl) {
         OpenAiEmbeddingModel.OpenAiEmbeddingModelBuilder builder = OpenAiEmbeddingModel.builder()
                 .apiKey(apiKey)
                 .modelName(embeddingModelName)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Preparation"
+  short_description: "Generate travel prep advice from schedule and weather"
+  default_prompt: "Use the travel-preparation-skill to decide what a student should prepare before going out or attending class."
